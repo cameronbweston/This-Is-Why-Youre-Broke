@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" type="image/png" href="">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
   <title>This Is Why You're Broke</title>
   {% block head %}
   {% endblock %}
@@ -17,7 +21,11 @@
     </div>
     <nav>
       <ul>
-        <li><a href="/premiumcontent">Premium Content</a></li>
+        <li><a href="{% url 'subs_index' %}">All Subs</a></li>
+        <li><a href="{% url 'subs_create' %}">Add Subs</a></li>
+        <li><a href="">All Stupid Purchases</a></li>
+        <li><a href="">Add Stupid Purchase</a></li>
+        <li><a href="{% url 'premiumcontent' %}">Premium Content</a></li>
       </ul>
     </nav>
   </header>
