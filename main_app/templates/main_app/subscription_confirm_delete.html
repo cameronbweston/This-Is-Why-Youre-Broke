@@ -10,7 +10,7 @@
 
 <form action="" method="POST" class="form">
   {% csrf_token %}
-  <a href="{% url 'subs_detail' sub.id %}" class="btn secondary">Cancel</a>
+  <a href="{% url 'subs_detail' object.id %}" class="btn secondary">Cancel</a>
   <button type="submit" class="btn danger">Confirm Delete</button>
 </form>
 
