@@ -16,8 +16,9 @@ def subs_index(request):
   return render(request, 'subscriptions/index.html', {'subs' : subs})
 
 def subs_detail(request, sub_id):
-  sub = Subscription.objects.get(sub_id = sub_id)
-
+  sub = Subscription.objects.get(id = sub_id)
+  return render(request, 'subscriptions/detail.html', {'sub': sub})
+  
 class SubCreate(CreateView):
   model = Subscription
   fields = '__all__'

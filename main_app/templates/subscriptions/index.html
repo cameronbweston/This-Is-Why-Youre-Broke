@@ -14,10 +14,13 @@
 <section class="card-container">
   {% for sub in subs %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-        </div>
-        <h2 class="card-title">{{ sub.name }}</h2>
+      <a href="/subs/{{ sub.id }}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img src="" alt="SubLogo">
+          </div>
+          <h2 class="card-title">{{ sub.name }}</h2>
+      </a>
       </div>
     </div>
   {% endfor %}
