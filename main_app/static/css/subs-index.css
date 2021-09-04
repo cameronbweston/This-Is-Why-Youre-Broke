@@ -5,6 +5,11 @@
   flex-wrap: wrap;
 }
 
+.subLogo {
+  height: 50%;
+  width: 50%;
+}
+
 .card {
   width: 275px;
   margin: 10px;
@@ -17,10 +22,6 @@
   width: 100%;
 }
 
-.usr-img {
-  width: 100%;
-  border-radius: var(--card-border-radius);
-}
 
 .card > a {
   text-decoration: none;

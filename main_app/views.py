@@ -22,7 +22,7 @@ def subs_detail(request, sub_id):
 
 class SubCreate(CreateView):
   model = Subscription
-  fields = '__all__'
+  fields = ['name', 'price']
   success_url = '/subscriptions/'
 
 class SubUpdate(UpdateView):

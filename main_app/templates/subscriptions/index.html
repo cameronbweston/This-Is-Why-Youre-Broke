@@ -17,9 +17,10 @@
       <a href="/subs/{{ sub.id }}">
         <div class="card-content">
           <div class="card-img-container">
-            <img src="" alt="SubLogo">
+            <img class="subLogo" src="{% static sub.image %}" alt="SubLogo">
           </div>
           <h2 class="card-title">{{ sub.name }}</h2>
+          <h3>{{ sub.price }}</h3>
       </a>
       </div>
     </div>
