@@ -10,7 +10,7 @@
 <section class="page-header">
   <h1>Subscriptions List</h1>
 </section>
-  <h2>Total Money Spent: {{total_price}}</h2>
+  <h2>Total Amount Spent: ${{total_price}}</h2>
 
 <section class="card-container">
   {% for sub in subs %}
@@ -21,7 +21,7 @@
             <img class="subLogo" src="{% static sub.image %}" alt="SubLogo">
           </div>
           <h2 class="card-title">{{ sub.name }}</h2>
-          <h3>{{ sub.price }}</h3>
+          <h3>${{ sub.price }} a month</h3>
       </a>
     </div>
       </div>
