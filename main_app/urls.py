@@ -12,5 +12,8 @@ urlpatterns = [
   path('subs/<int:pk>/delete/', views.SubDelete.as_view(), name='subs_delete'),
   #Purchases Views
   path('purchases/', views.purchases_index, name='purchases_index'),
+  path('purchases/<int:purchase_id>/', views.purchase_detail, name='purchase_detail'),
   path('purchases/create/', views.PurchaseCreate.as_view(), name='purchase_create'),
+  path('purchases/<int:pk>/update/', views.PurchaseUpdate.as_view(), name='purchase_update'),
+  path('purchases/<int:pk>/delete/', views.PurchaseDelete.as_view(), name='purchase_delete'),
 ]

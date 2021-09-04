@@ -1,0 +1,20 @@
+  {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/subs-index.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<section>
+  <div>
+    <h1>{{ purchase.name }}</h1>
+      <div class="">
+        <a href="{% url 'purchase_update' purchase.id %}" class="btn warn">Edit</a>
+        <a href="{% url 'purchase_delete' purchase.id %}" class="btn danger">Delete</a>
+      </div>
+  </div>
+</section>
+
+{% endblock content %}

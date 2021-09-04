@@ -33,12 +33,24 @@ class SubDelete(DeleteView):
   model = Subscription
   success_url = '/subscriptions/'
 
+#Purchase Views
 def purchases_index(request):
   purchases = Purchase.objects.all()
   return render(request, 'purchases/index.html', {'purchases': purchases})
 
-#Purchase Views
+def purchase_detail(request, purchase_id):
+  purchase = Purchase.objects.get(id = purchase_id)
+  return render(request, 'purchases/detail.html', {'purchase': purchase})
+
 class PurchaseCreate(CreateView):
   model = Purchase
   fields = '__all__'
+  success_url = '/purchases/'
+
+class PurchaseUpdate(UpdateView):
+  model = Purchase
+  fields = '__all__'
+
+class PurchaseDelete(DeleteView):
+  model = Purchase  
   success_url = '/purchases/'
