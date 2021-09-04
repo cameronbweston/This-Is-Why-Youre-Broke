@@ -14,7 +14,11 @@ def premiumcontent(request):
 #Subscription Views
 def subs_index(request):
   subs = Subscription.objects.all()
-  return render(request, 'subscriptions/index.html', {'subs' : subs})
+  total_price = 0;
+  for sub in subs:
+    total_price += sub.price
+
+  return render(request, 'subscriptions/index.html', {'subs' : subs, 'total_price': total_price})
 
 def subs_detail(request, sub_id):
   sub = Subscription.objects.get(id = sub_id)
