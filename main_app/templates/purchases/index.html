@@ -10,14 +10,19 @@
 <section class="page-header">
   <h1>Stupid Purchases List</h1>
 </section>
+  <h2>Total Value of Stuff: ${{total_price}}</h2>
 
 <section class="card-container">
   {% for purchase in purchases %}
     <div class="card">
-      <a href="/purchases/{{ purchase.id }}">
+      <a href="{% url 'purchase_detail' purchase.id %}">
         <div class="card-content">
           <div class="card-img-container">
-            <img src="" alt="itemImage">
+            {% if purchase.photo.url %}
+              <img src="{{purchase.photo.url}}" alt="A photo of {{purchase.name}}" class="subLogo">
+            {% else %}
+              <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="placeholderImage">
+            {% endif %}
           </div>
           <h2 class="card-title">{{ purchase.name }}</h2>
           <h3>${{purchase.price}}</h3>

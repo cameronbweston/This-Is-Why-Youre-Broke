@@ -3,11 +3,17 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Purchase, Subscription
+from .models import Purchase, Subscription, Photo
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
+import uuid
+import boto3
+
+S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
+BUCKET = 'this-is-why-youre-broke'
 
 # Create your views here.
 def signup(request):
@@ -34,9 +40,8 @@ def premiumcontent(request):
 @login_required
 def subs_index(request):
   subs = Subscription.objects.filter(user = request.user)
-  total_price = 0;
-  for sub in subs:
-    total_price += sub.price
+  price = subs.aggregate(Sum('price'))
+  total_price = price['price__sum']
 
   return render(request, 'subscriptions/index.html', {'subs' : subs, 'total_price': total_price})
 
@@ -66,7 +71,10 @@ class SubDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def purchases_index(request):
   purchases = Purchase.objects.filter(user = request.user)
-  return render(request, 'purchases/index.html', {'purchases': purchases})
+  price = purchases.aggregate(Sum('price'))
+  total_price = price['price__sum']
+
+  return render(request, 'purchases/index.html', {'purchases': purchases, 'total_price': total_price})
 
 @login_required
 def purchase_detail(request, purchase_id):
@@ -84,8 +92,28 @@ class PurchaseCreate(LoginRequiredMixin, CreateView):
 
 class PurchaseUpdate(LoginRequiredMixin, UpdateView):
   model = Purchase
-  fields = '__all__'
+  fields = ['name', 'price']
 
 class PurchaseDelete(LoginRequiredMixin, DeleteView):
   model = Purchase  
   success_url = '/purchases/'
+
+def add_photo(request, purchase_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      # build the full url string
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      # we can assign to cat_id or cat (if you have a cat object)
+      photo = Photo(url=url, purchase_id = purchase_id)
+      # Remove old photo if it exists
+      purchase_photo = Photo.objects.filter(purchase_id = purchase_id)
+      if purchase_photo.first():
+        purchase_photo.first().delete()
+      photo.save()
+    except Exception as err:
+      print('An error occurred uploading file to S3: %s' % err)
+  return redirect('purchase_detail', purchase_id = purchase_id)

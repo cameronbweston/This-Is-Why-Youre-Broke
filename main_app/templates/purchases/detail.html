@@ -2,19 +2,41 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/subs-index.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/subs-index.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/purchase-detail.css' %}"/>
+  <script defer src="{% static 'js/cat-detail.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<section>
-  <div>
-    <h1>{{ purchase.name }}</h1>
-      <div class="">
-        <a href="{% url 'purchase_update' purchase.id %}" class="btn warn">Edit</a>
-        <a href="{% url 'purchase_delete' purchase.id %}" class="btn danger">Delete</a>
-      </div>
-  </div>
+<section class="purchase-container">
+    <div class="purchase-img">
+    {% if purchase.photo.url %}
+      <img src="{{purchase.photo.url}}" alt="A photo of {{purchase.name}}" class="usr-img">
+    {% else %}
+      <img 
+        src="{% static 'images/sk8r-boi-cat.svg' %}" 
+        alt="placeholderImage"
+      >
+    {% endif %}
+    </div>
+    <div class="purchase-details">
+      <h1>{{ purchase.name }}</h1>
+        <div class="purchase-actions">
+          <a href="{% url 'purchase_update' purchase.id %}" class="btn warn">Edit</a>
+          <a href="{% url 'purchase_delete' purchase.id %}" class="btn danger">Delete</a>
+        </div>
+      <h3>Change {{ purchase.name }}'s photo</h3>
+      <p id="file-name"></p>
+      <form action="{% url 'add_photo' purchase.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <label class="btn secondary">
+          Choose photo
+          <input type="file" name="photo-file" id="file-input">
+        </label>
+        <button type="submit" class="btn submit">Upload Photo</button>
+      </form>
+    </div>
 </section>
 
 {% endblock content %}
