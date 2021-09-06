@@ -80,16 +80,15 @@
   </div>
 
   <div>
+    <h1 id="totalInvestmentHeader">Total investment over the course of ___ Years: $___</h1>
     <canvas id="myChart" width="380" height="200"></canvas>
     <script>
-
+      //Placeholder chart for populating page
       var ctx = document.getElementById('myChart').getContext('2d');
-      var chartData = []
-      //var chartLabels
       var myChart = new Chart(ctx, {
           type: 'line',
           data: {
-              labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+              labels: ['1', '2', '3', '4', '5'],
               datasets: [{
                   label: 'Investment Over Time',
                   backgroundColor: 'rgb(0,214,75, 0.2)',
@@ -110,29 +109,6 @@
               }
           }
       });
-
-      const buttonSimple = document.getElementById("btnSimple")
-      const term = document.getElementById("termSimple")
-      //buttonSimple.addEventListener('click', changeGraph())
-
-      console.log(term.value)
-
-      function changeGraph() {
-        simpleInterest()
-
-        console.log(myChart.config.data.labels)
-        let yearLabels = []
-        let currentYear = parseInt(new Date().getFullYear())
-        for (let i=0; i <= term.value; i++) {
-          yearLabels.push(currentYear)
-          currentYear++
-        }
-        myChart.data.datasets[0].data = simpleInterestByYear
-        myChart.config.data.labels = yearLabels
-        myChart.update()
-
-        console.log(`dataset data ${myChart.data.datasets[0].data}`)
-      }
     </script>
   </div>
 {% endblock %}

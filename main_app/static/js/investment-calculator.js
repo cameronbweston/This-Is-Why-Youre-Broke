@@ -34,6 +34,7 @@ function simpleInterest() {
   //
   document.getElementById("siOutput-01").innerHTML = "Interest: $" + simpleInt.toFixed(2);
   document.getElementById("siOutput-02").innerHTML = "Total plus interest: $" + amount;
+  document.getElementById("totalInvestmentHeader").innerHTML = `Total investment over the course of ${termOfLoan} years: $${amount}`
 }
 
 function compoundInterest() {
@@ -50,4 +51,52 @@ function compoundInterest() {
   var amount = (principal * d).toFixed(2);
   document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
   document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
+}
+
+function changeGraph() {
+  //Create the initial chart
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+          datasets: [{
+              label: 'Investment Over Time',
+              backgroundColor: 'rgb(0,214,75, 0.2)',
+              data: [],
+              fill: true,
+              borderColor: 'rgb(0,214,75)',
+              tension: 0.1,
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true,
+                  ticks: {
+                    precision: 0
+                  }
+              }
+          }
+      }
+  });
+
+  const buttonSimple = document.getElementById("btnSimple")
+  const term = document.getElementById("termSimple")
+  //buttonSimple.addEventListener('click', changeGraph())
+
+
+    simpleInterest()
+
+    console.log(myChart.config.data.labels)
+    let yearLabels = []
+    let currentYear = parseInt(new Date().getFullYear())
+    for (let i=0; i <= term.value; i++) {
+      yearLabels.push(currentYear)
+      currentYear++
+    }
+    myChart.data.datasets[0].data = simpleInterestByYear
+    myChart.config.data.labels = yearLabels
+    myChart.update()
+  
 }
