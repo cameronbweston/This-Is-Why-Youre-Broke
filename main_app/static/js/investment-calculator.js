@@ -3,12 +3,14 @@ simpleOutput1 = document.getElementById("siOutput-01")
 simpleOutput2 = document.getElementById("siOutput-02")
 compoundOutput1 = document.getElementById("ciOutput-01")
 compoundOutput2 = document.getElementById("ciOutput-02")
-
+// 
 var principal = 0;
 var interestRate = 0;
 var timesCompounded = 0;
 var termOfLoan = 0;
 var amount = 0;
+let simpleInterestByYear = []
+let compoundInterestByYear = []
 
 function simpleInterest() {
   event.preventDefault();
@@ -18,8 +20,15 @@ function simpleInterest() {
   var termOfLoan = parseFloat(document.getElementById("termSimple").value);
   var simpleInt = principal * interestRate * termOfLoan;
   var amount = (principal + simpleInt).toFixed(2);
-  simpleOutput1.innerHTML = "Interest: $" + simpleInt.toFixed(2);
-  simpleOutput2.innerHTML = "Total plus interest: $" + amount;
+  // get interest each year
+  for(let i=0; i <= termOfLoan; i++) {
+    let yearlyInvestment = (principal * (1 + (i * interestRate))).toFixed(2)
+    simpleInterestByYear.push(yearlyInvestment)
+  }
+  console.log(simpleInterestByYear)
+  //
+  document.getElementById("siOutput-01").innerHTML = "Interest: $" + simpleInt.toFixed(2);
+  document.getElementById("siOutput-02").innerHTML = "Total plus interest: $" + amount;
 }
 
 function compoundInterest() {
@@ -34,6 +43,10 @@ function compoundInterest() {
   var c = timesCompounded * termOfLoan;
   var d = Math.pow(b, c);
   var amount = (principal * d).toFixed(2);
-  compoundOutput1.innerHTML = "Interest: $" + (amount - principal).toFixed(2);
-  compoundOutput2.innerHTML = "Total plus interest: $" + amount;
+  document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
+  document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
+}
+
+function createGraph() {
+  
 }
