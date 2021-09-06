@@ -19,5 +19,7 @@ urlpatterns = [
   #User Signup
   path('accounts/signup/', views.signup, name='signup'),
   #Photos
-  path('purchases/<int:purchase_id>/add_photo/', views.add_photo, name='add_photo')
+  path('purchases/<int:purchase_id>/add_photo/', views.add_photo, name='add_photo'),
+  #Investment Views
+  path('investment/', views.investment_index, name='investment_index'),
 ]

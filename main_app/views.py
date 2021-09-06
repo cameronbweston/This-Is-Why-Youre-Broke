@@ -117,3 +117,11 @@ def add_photo(request, purchase_id):
     except Exception as err:
       print('An error occurred uploading file to S3: %s' % err)
   return redirect('purchase_detail', purchase_id = purchase_id)
+
+@login_required
+def investment_index(request):
+  subs = Subscription.objects.filter(user = request.user)
+  price = subs.aggregate(Sum('price'))
+  total_price = price['price__sum']
+  #Run calculations here?? Or maybe in JS file
+  return render(request, 'investments/index.html', {'subs' : subs, 'total_price': total_price})  
