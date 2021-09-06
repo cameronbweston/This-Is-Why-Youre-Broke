@@ -3,8 +3,8 @@
 
 {% block head %}
   {% comment %} Link CSS file {% endcomment %}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <script src="{% static 'js/investment-calculator.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -32,9 +32,9 @@
         </div>
         <div class="form-group">
           <label for="termSimple">Term of Loan</label>
-          <input type="text" class="form-control" id="termSimple" placeholder="Example: 2 (must be in terms of years)">
+          <input type="text" class="form-control" id="termSimple" placeholder="Years">
         </div>
-        <button type="submit" class="btn btn-primary" id="btnSimple" onclick="simpleInterest()">Submit</button>
+        <button type="button" class="btn btn-primary" id="btnSimple" onClick="changeGraph()">Submit</button>
       </form>
       <div>
         <p class="lead mt-3" id="siOutput-01"></p>
@@ -79,31 +79,60 @@
     </div>
   </div>
 
-  <canvas id="myChart" width="380" height="200"></canvas>
-  <script>
-      
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var graphData = simpleInterestByYear
-  var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
-          datasets: [{
-              label: 'Investment Over Time',
-              backgroundColor: 'rgb(0,214,75, 0.2)',
-              data: graphData,
-              fill: true,
-              borderColor: 'rgb(0,214,75)',
-              tension: 0.1,
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
+  <div>
+    <canvas id="myChart" width="380" height="200"></canvas>
+    <script>
+
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chartData = []
+      //var chartLabels
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+              datasets: [{
+                  label: 'Investment Over Time',
+                  backgroundColor: 'rgb(0,214,75, 0.2)',
+                  data: [],
+                  fill: true,
+                  borderColor: 'rgb(0,214,75)',
+                  tension: 0.1,
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      ticks: {
+                        precision: 0
+                      }
+                  }
               }
           }
+      });
+
+      const buttonSimple = document.getElementById("btnSimple")
+      const term = document.getElementById("termSimple")
+      //buttonSimple.addEventListener('click', changeGraph())
+
+      console.log(term.value)
+
+      function changeGraph() {
+        simpleInterest()
+
+        console.log(myChart.config.data.labels)
+        let yearLabels = []
+        let currentYear = parseInt(new Date().getFullYear())
+        for (let i=0; i <= term.value; i++) {
+          yearLabels.push(currentYear)
+          currentYear++
+        }
+        myChart.data.datasets[0].data = simpleInterestByYear
+        myChart.config.data.labels = yearLabels
+        myChart.update()
+
+        console.log(`dataset data ${myChart.data.datasets[0].data}`)
       }
-  });
-  </script>
+    </script>
+  </div>
 {% endblock %}
