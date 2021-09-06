@@ -78,20 +78,20 @@ function changeGraph() {
       }
   });
 
-    const buttonSimple = document.getElementById("btnSimple")
-    const term = document.getElementById("termSimple")
+  const buttonSimple = document.getElementById("btnSimple")
+  const term = document.getElementById("termSimple")
+  //Run simple interest calculation
+  simpleInterest()
 
-    simpleInterest()
+  //Update chart to reflect growth
+  let yearLabels = []
+  let currentYear = parseInt(new Date().getFullYear())
+  for (let i=0; i <= term.value; i++) {
+    yearLabels.push(currentYear)
+    currentYear++
+  }
+  myChart.data.datasets[0].data = simpleInterestByYear
+  myChart.config.data.labels = yearLabels
+  myChart.update()
 
-    console.log(myChart.config.data.labels)
-    let yearLabels = []
-    let currentYear = parseInt(new Date().getFullYear())
-    for (let i=0; i <= term.value; i++) {
-      yearLabels.push(currentYear)
-      currentYear++
-    }
-    myChart.data.datasets[0].data = simpleInterestByYear
-    myChart.config.data.labels = yearLabels
-    myChart.update()
-  
 }
