@@ -78,10 +78,8 @@ function changeGraph() {
       }
   });
 
-  const buttonSimple = document.getElementById("btnSimple")
-  const term = document.getElementById("termSimple")
-  //buttonSimple.addEventListener('click', changeGraph())
-
+    const buttonSimple = document.getElementById("btnSimple")
+    const term = document.getElementById("termSimple")
 
     simpleInterest()
 
