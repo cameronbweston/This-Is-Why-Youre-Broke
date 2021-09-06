@@ -1,3 +1,9 @@
+// Cached element references
+simpleOutput1 = document.getElementById("siOutput-01")
+simpleOutput2 = document.getElementById("siOutput-02")
+compoundOutput1 = document.getElementById("ciOutput-01")
+compoundOutput2 = document.getElementById("ciOutput-02")
+
 var principal = 0;
 var interestRate = 0;
 var timesCompounded = 0;
@@ -12,8 +18,8 @@ function simpleInterest() {
   var termOfLoan = parseFloat(document.getElementById("termSimple").value);
   var simpleInt = principal * interestRate * termOfLoan;
   var amount = (principal + simpleInt).toFixed(2);
-  document.getElementById("siOutput-01").innerHTML = "Interest: $" + simpleInt.toFixed(2);
-  document.getElementById("siOutput-02").innerHTML = "Total plus interest: $" + amount;
+  simpleOutput1.innerHTML = "Interest: $" + simpleInt.toFixed(2);
+  simpleOutput2.innerHTML = "Total plus interest: $" + amount;
 }
 
 function compoundInterest() {
@@ -28,6 +34,6 @@ function compoundInterest() {
   var c = timesCompounded * termOfLoan;
   var d = Math.pow(b, c);
   var amount = (principal * d).toFixed(2);
-  document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
-  document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
+  compoundOutput1.innerHTML = "Interest: $" + (amount - principal).toFixed(2);
+  compoundOutput2.innerHTML = "Total plus interest: $" + amount;
 }

@@ -41,9 +41,9 @@ def premiumcontent(request):
 def subs_index(request):
   subs = Subscription.objects.filter(user = request.user)
   price = subs.aggregate(Sum('price'))
-  total_price = price['price__sum']
-
-  return render(request, 'subscriptions/index.html', {'subs' : subs, 'total_price': total_price})
+  monthly_price = price['price__sum']
+  yearly_price = monthly_price * 12
+  return render(request, 'subscriptions/index.html', {'subs' : subs, 'monthly_price': monthly_price, 'yearly_price': yearly_price})  
 
 @login_required
 def subs_detail(request, sub_id):
