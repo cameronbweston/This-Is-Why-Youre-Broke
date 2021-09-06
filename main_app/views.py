@@ -122,6 +122,7 @@ def add_photo(request, purchase_id):
 def investment_index(request):
   subs = Subscription.objects.filter(user = request.user)
   price = subs.aggregate(Sum('price'))
-  total_price = price['price__sum']
+  monthly_price = price['price__sum']
+  yearly_price = monthly_price * 12
   #Run calculations here?? Or maybe in JS file
-  return render(request, 'investments/index.html', {'subs' : subs, 'total_price': total_price})  
+  return render(request, 'investments/index.html', {'subs' : subs, 'monthly_price': monthly_price, 'yearly_price': yearly_price})  

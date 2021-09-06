@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block head %}
-{% comment %} Link CSS file {% endcomment %}
+  {% comment %} Link CSS file {% endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script src="{% static 'js/investment-calculator.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -10,6 +12,109 @@
 <section class="page-header">
   <h1>Investments</h1>
 </section>
-  <h2>Total Amount Spent: ${{total_price}}</h2>
+  <h2>Total Amount Spent Yearly: ${{yearly_price}}</h2>
+  <h2>Total Amount Spent Monthly: ${{monthly_price}}</h2>
 
+    <div class="jumbotron">
+    <h1 class="text-center display-4">JavaScript Interest Calculator</h1>
+    <hr>
+    <div class="container" id="simple-interest">
+      <h3>Simple Interest</h3>
+      <p class="lead">A=i+(prt)</p>
+      <form id="siForm">
+        <div class="form-group">
+          <label for="principalSimple">Principal</label>
+          <input type="text" class="form-control" id="principalSimple" placeholder="Enter amount without dollar sign" value="{{yearly_price}}">
+        </div>
+        <div class="form-group">
+          <label for="interestSimple">Interest Rate</label>
+          <input type="text" class="form-control" id="interestSimple" placeholder="Example: 12%">
+        </div>
+        <div class="form-group">
+          <label for="termSimple">Term of Loan</label>
+          <input type="text" class="form-control" id="termSimple" placeholder="Example: 2 (must be in terms of years)">
+        </div>
+        <button type="submit" class="btn btn-primary" id="btnSimple" onclick="simpleInterest()">Submit</button>
+      </form>
+      <div>
+        <p class="lead mt-3" id="siOutput-01"></p>
+        <p class="lead mb-3" id="siOutput-02"></p>
+      </div>
+      <div class="text-center">
+        <input class="btn btn-secondary btn-lg" type="button" value="Reset" onClick="document.getElementById('siForm').reset()">
+      </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="container" div="compound-interest ">
+      <h3>Compound Interest</h3>
+      <p class="lead">A=p(1+(r/n))^(nt)</p>
+      <form id="ciForm">
+        <div class="form-group">
+          <label for="principalCompound">Principal</label>
+          <input type="text" class="form-control" id="principalCompound" placeholder="Enter amount without dollar sign" value="{{yearly_price}}">
+        </div>
+        <div class="form-group">
+          <label for="interestCompound">Interest Rate</label>
+          <input type="text" class="form-control" id="interestCompound" placeholder="Example: 12%">
+        </div>
+        <div class="form-group">
+          <label for="timesCompounded">Times Compounded per Year</label>
+          <input type="text" class="form-control" id="timesCompounded" placeholder="Example: 4 (means compounded quarterly)">
+        </div>
+        <div class="form-group">
+          <label for="termCompound">Term of Loan</label>
+          <input type="text" class="form-control" id="termCompound" placeholder="Example: 2 (must be in terms of years)">
+        </div>
+        <button type="submit" class="btn btn-primary" id="btnCompound" onclick="compoundInterest()">Submit</button>
+      </form>
+      <div>
+        <p class="lead mt-3" id="ciOutput-01"></p>
+        <p class="lead mb-3" id="ciOutput-02"></p>
+      </div>
+      <div class="text-center">
+        <input class="btn btn-secondary btn-lg" type="button" value="Reset" onClick="document.getElementById('ciForm').reset()">
+      </div>
+    </div>
+  </div>
+  <canvas id="myChart" width="380" height="200"></canvas>
+  <script>
+      
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
 {% endblock %}
