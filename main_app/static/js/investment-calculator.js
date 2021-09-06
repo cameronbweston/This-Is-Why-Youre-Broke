@@ -49,6 +49,21 @@ function compoundInterest() {
   var c = timesCompounded * termOfLoan;
   var d = Math.pow(b, c);
   var amount = (principal * d).toFixed(2);
+  //Calculate compounding amount per year
+  // A=P(1 + r/n)^nt
+  let currentTotal = principal;
+  for (let i = 0; i < termOfLoan; i++) {
+    console.log(currentTotal)
+    var x = interestRate / timesCompounded;
+    var y = 1 + x;
+    var q = Math.pow(y, timesCompounded);
+    var myAmount = (currentTotal * q).toFixed(2);
+    currentTotal = myAmount
+  }
+
+  console.log(`amount for all years: ${amount}`)
+  console.log(`amount for my calc: ${currentTotal}`)
+  //
   document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
   document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
 }
