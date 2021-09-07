@@ -35,6 +35,8 @@ function simpleInterest() {
   document.getElementById("siOutput-01").innerHTML = "Interest: $" + simpleInt.toFixed(2);
   document.getElementById("siOutput-02").innerHTML = "Total plus interest: $" + amount;
   document.getElementById("totalInvestmentHeader").innerHTML = `Total investment over the course of ${termOfLoan} years: $${amount}`
+  //call change graph
+  changeGraph('simple', termOfLoan)
 }
 
 function compoundInterest() {
@@ -52,23 +54,29 @@ function compoundInterest() {
   //Calculate compounding amount per year
   // A=P(1 + r/n)^nt
   let currentTotal = principal;
+  compoundInterestByYear.push(currentTotal)
+
   for (let i = 0; i < termOfLoan; i++) {
     console.log(currentTotal)
     var x = interestRate / timesCompounded;
     var y = 1 + x;
     var q = Math.pow(y, timesCompounded);
-    var myAmount = (currentTotal * q).toFixed(2);
-    currentTotal = myAmount
+    var myAmount = (currentTotal * q);
+    currentTotal = myAmount.toFixed(2)
+    compoundInterestByYear.push(myAmount.toFixed(2))
   }
-
-  console.log(`amount for all years: ${amount}`)
-  console.log(`amount for my calc: ${currentTotal}`)
-  //
+  //TODO: bug where current total is off by a few pennies because of the rounding
+  // console.log(`amount for all years: ${amount}`)
+  // console.log(`amount for my calc: ${currentTotal}`)
+  // console.log(`amounts for my array: ${compoundInterestByYear}`)
   document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
   document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
+  document.getElementById("totalInvestmentHeader").innerHTML = `Total investment over the course of ${termOfLoan} years: $${amount}`
+  //call change graph
+  changeGraph('compound', termOfLoan)
 }
 
-function changeGraph() {
+function changeGraph(type, term) {
   //Create the initial chart
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
@@ -93,20 +101,32 @@ function changeGraph() {
       }
   });
 
-  const buttonSimple = document.getElementById("btnSimple")
-  const term = document.getElementById("termSimple")
-  //Run simple interest calculation
-  simpleInterest()
-
-  //Update chart to reflect growth
-  let yearLabels = []
-  let currentYear = parseInt(new Date().getFullYear())
-  for (let i=0; i <= term.value; i++) {
-    yearLabels.push(currentYear)
-    currentYear++
+  if (type == 'compound') {
+    //set graph up to display compound interest
+    //Update chart to reflect growth
+    let yearLabels = []
+    let currentYear = parseInt(new Date().getFullYear())
+    for (let i = 0; i <= term; i++) {
+      yearLabels.push(currentYear)
+      currentYear++
+    }
+    console.log(`compound interst by year: ${compoundInterestByYear}`)
+    myChart.data.datasets[0].data = compoundInterestByYear
+    myChart.config.data.labels = yearLabels
+    myChart.update()
   }
-  myChart.data.datasets[0].data = simpleInterestByYear
-  myChart.config.data.labels = yearLabels
-  myChart.update()
+  else if (type == 'simple') {
+    //set graph up to display simple interest
+    //Update chart to reflect growth
+    let yearLabels = []
+    let currentYear = parseInt(new Date().getFullYear())
+    for (let i = 0; i <= term; i++) {
+      yearLabels.push(currentYear)
+      currentYear++
+    }
+    myChart.data.datasets[0].data = simpleInterestByYear
+    myChart.config.data.labels = yearLabels
+    myChart.update()
+  }
 
 }
