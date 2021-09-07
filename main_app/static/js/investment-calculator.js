@@ -66,9 +66,6 @@ function compoundInterest() {
     compoundInterestByYear.push(myAmount.toFixed(2))
   }
   //TODO: bug where current total is off by a few pennies because of the rounding
-  // console.log(`amount for all years: ${amount}`)
-  // console.log(`amount for my calc: ${currentTotal}`)
-  // console.log(`amounts for my array: ${compoundInterestByYear}`)
   document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
   document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
   document.getElementById("totalInvestmentHeader").innerHTML = `Total investment over the course of ${termOfLoan} years: $${amount}`
@@ -101,32 +98,21 @@ function changeGraph(type, term) {
       }
   });
 
+  let yearLabels = []
+  let currentYear = parseInt(new Date().getFullYear())
+  for (let i = 0; i <= term; i++) {
+    yearLabels.push(currentYear)
+    currentYear++
+  }
+  myChart.config.data.labels = yearLabels
+
+  //Pass data set depending on which one clicked
   if (type == 'compound') {
-    //set graph up to display compound interest
-    //Update chart to reflect growth
-    let yearLabels = []
-    let currentYear = parseInt(new Date().getFullYear())
-    for (let i = 0; i <= term; i++) {
-      yearLabels.push(currentYear)
-      currentYear++
-    }
-    console.log(`compound interst by year: ${compoundInterestByYear}`)
     myChart.data.datasets[0].data = compoundInterestByYear
-    myChart.config.data.labels = yearLabels
-    myChart.update()
   }
   else if (type == 'simple') {
-    //set graph up to display simple interest
-    //Update chart to reflect growth
-    let yearLabels = []
-    let currentYear = parseInt(new Date().getFullYear())
-    for (let i = 0; i <= term; i++) {
-      yearLabels.push(currentYear)
-      currentYear++
-    }
     myChart.data.datasets[0].data = simpleInterestByYear
-    myChart.config.data.labels = yearLabels
-    myChart.update()
   }
-
+  
+  myChart.update()
 }
