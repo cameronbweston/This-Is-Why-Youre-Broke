@@ -9,77 +9,59 @@
 
 {% block content %}
 
-<section class="page-header">
-  <h1>Investments</h1>
-</section>
-  <h2>Total Amount Spent Yearly: ${{yearly_price}}</h2>
-  <h2>Total Amount Spent Monthly: ${{monthly_price}}</h2>
-
     {% comment %} Calculator Container {% endcomment %}
-    <div class="flex m-5 bg-gray-50 text-base rounded-md">
+    <div class="flex flex-row m-5 mx-40 bg-gray-200 text-base rounded-xl items-center justify-items-center">
+      {% comment %}Simple Calculator  {% endcomment %}
+      <div class="container mx-auto max-w-md shadow-md hover:shadow-lg m-5">
+      <div class="py-12 p-10 bg-white rounded-xl">
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Principal</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" id="principalSimple"  placeholder="Amount" value="{{yearly_price}}"/>
+        </div>
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Interest Rate</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" id="interestSimple" placeholder="Example: 12%" />
+        </div>
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Length of Time</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" id="termSimple" placeholder="Years"/>
+        </div>
+        <button class="w-full mt-6 text-indigo-50 font-bold bg-indigo-600 py-3 rounded-md hover:bg-indigo-500 transition duration-300" id="btnSimple" onClick="simpleInterest()">Submit</button>
+      </div>
+    </div>
+      {% comment %} Compound Calculator {% endcomment %}
+    <div class="container mx-auto max-w-md shadow-md hover:shadow-lg m-5">
+      <div class="py-12 p-10 bg-white rounded-xl">
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Principal</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" id="principalCompound" placeholder="Enter amount without dollar sign" value="{{yearly_price}}"/>
+        </div>
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Interest Rate</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded"  id="interestCompound" placeholder="Example: 12%"/>
+        </div>
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Times Compounded Per Year</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded"  id="timesCompounded" placeholder="2 (semi-annually)">
+        </div>
+        <div class="mb-3">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2" for="name">Term of Loan</label>
+          <input type="text" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" id="termCompound" placeholder="Years"/>
+        </div>
+        <button class="w-full mt-6 text-indigo-50 font-bold bg-indigo-600 py-3 rounded-md hover:bg-indigo-500 transition duration-300" id="btnCompound" onclick="compoundInterest()">Submit</button>
+      </div>
+    </div>
 
-    {% comment %}Simple Calculator  {% endcomment %}
-    <div class="container" id="simple-interest">
-      <h3>Simple Interest</h3>
-      <form id="siForm">
-        <div class="form-group">
-          <label for="principalSimple">Principal</label>
-          <input type="text" class="form-control" id="principalSimple" placeholder="Enter amount without dollar sign" value="{{yearly_price}}">
-        </div>
-        <div class="form-group">
-          <label for="interestSimple">Interest Rate</label>
-          <input type="text" class="form-control" id="interestSimple" placeholder="Example: 12%">
-        </div>
-        <div class="form-group">
-          <label for="termSimple">Length of Time</label>
-          <input type="text" class="form-control" id="termSimple" placeholder="Years">
-        </div>
-        <button type="button" class="btn btn-primary" id="btnSimple" onClick="simpleInterest()">Submit</button>
-      </form>
-      <div>
-        <p class="lead mt-3" id="siOutput-01"></p>
-        <p class="lead mb-3" id="siOutput-02"></p>
-      </div>
-      <div class="text-center">
-        <input class="btn btn-secondary btn-lg" type="button" value="Reset" onClick="document.getElementById('siForm').reset()">
-      </div>
-    </div>
-    {% comment %} Compound Calculator {% endcomment %}
-    <div class="container" div="compound-interest ">
-      <h3>Compound Interest</h3>
-      <form id="ciForm">
-        <div class="form-group">
-          <label for="principalCompound">Principal</label>
-          <input type="text" class="form-control" id="principalCompound" placeholder="Enter amount without dollar sign" value="{{yearly_price}}">
-        </div>
-        <div class="form-group">
-          <label for="interestCompound">Interest Rate</label>
-          <input type="text" class="form-control" id="interestCompound" placeholder="Example: 12%">
-        </div>
-        <div class="form-group">
-          <label for="timesCompounded">Times Compounded per Year</label>
-          <input type="text" class="form-control" id="timesCompounded" placeholder="2 (semi-annually)">
-        </div>
-        <div class="form-group">
-          <label for="termCompound">Term of Loan</label>
-          <input type="text" class="form-control" id="termCompound" placeholder="Years">
-        </div>
-        <button type="button" class="btn btn-primary" id="btnCompound" onclick="compoundInterest()">Submit</button>
-      </form>
-      <div>
-        <p class="lead mt-3" id="ciOutput-01"></p>
-        <p class="lead mb-3" id="ciOutput-02"></p>
-      </div>
-      <div class="text-center">
-        <input class="btn btn-secondary btn-lg" type="button" value="Reset" onClick="document.getElementById('ciForm').reset()">
-      </div>
-    </div>
   </div>
 
   <div>
-    <h1 id="totalInvestmentHeader" class="flex bg-gray-50 m-5 text-base justify-center">Total investment over the course of ___ Years: $___</h1>
+    {% comment %} Investment Header {% endcomment %}
+    <div class="flex flex-col mx-40 bg-gray-50 m-5 text-base items-center align-center">
+      <h2 >Total Amount Spent Yearly: ${{yearly_price}}</h2>
+      <h1 id="totalInvestmentHeader">Total investment over the course of ___ Years: $___</h1>
+    </div>
     {% comment %} Canvas Div {% endcomment %}
-    <div class="bg-white rounded-md m-20">
+    <div class="bg-white rounded-md m-20 p-5">
       <canvas id="myChart" width="380" height="200"></canvas>
     </div>
     <script>

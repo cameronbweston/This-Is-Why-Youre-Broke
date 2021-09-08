@@ -1,8 +1,5 @@
 // Cached element references
-const simpleOutput1 = document.getElementById("siOutput-01")
-const simpleOutput2 = document.getElementById("siOutput-02")
-const compoundOutput1 = document.getElementById("ciOutput-01")
-const compoundOutput2 = document.getElementById("ciOutput-02")
+
 // 
 
 //Add Event Listeners
@@ -32,8 +29,8 @@ function simpleInterest() {
     simpleInterestByYear.push(yearlyInvestment)
   }
   //
-  document.getElementById("siOutput-01").innerHTML = "Interest: $" + simpleInt.toFixed(2);
-  document.getElementById("siOutput-02").innerHTML = "Total plus interest: $" + amount;
+  //document.getElementById("siOutput-01").innerHTML = "Interest: $" + simpleInt.toFixed(2);
+  //document.getElementById("siOutput-02").innerHTML = "Total plus interest: $" + amount;
   document.getElementById("totalInvestmentHeader").innerHTML = `Total investment over the course of ${termOfLoan} years: $${amount}`
   //call change graph
   changeGraph('simple', termOfLoan)
@@ -65,9 +62,9 @@ function compoundInterest() {
     currentTotal = myAmount.toFixed(2)
     compoundInterestByYear.push(myAmount.toFixed(2))
   }
-  //TODO: bug where current total is off by a few pennies because of the rounding
-  document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
-  document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
+  // bug where current total is off by a few pennies because of the rounding
+  //document.getElementById("ciOutput-01").innerHTML = "Interest: $" + (amount - principal).toFixed(2);
+  //document.getElementById("ciOutput-02").innerHTML = "Total plus interest: $" + amount;
   document.getElementById("totalInvestmentHeader").innerHTML = `Total investment over the course of ${termOfLoan} years: $${amount}`
   //call change graph
   changeGraph('compound', termOfLoan)
@@ -113,6 +110,6 @@ function changeGraph(type, term) {
   else if (type == 'simple') {
     myChart.data.datasets[0].data = simpleInterestByYear
   }
-  
+
   myChart.update()
 }
