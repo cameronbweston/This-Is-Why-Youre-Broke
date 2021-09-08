@@ -7,19 +7,22 @@
 
 {% block content %}
 
-  <div class="">
-    <h1>"If you don't find a way to make money while you sleep, you will work until you die."</h1><br>
-    <h2 style="text-align:right">-Warren Buffett</h2>
+<div class="flex flex-col items-center m-5">
+  <div class="text-center">
+    <h1>"If you don't find a way to make money while you sleep, you will work until you die."</h1>
+    <h2>-Warren Buffett</h2>
   </div>
-
-<section>
-  <form action="{% url 'home' %}" method="post" class="login">
-    <h1>Login</h1>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn submit">Login</button>
-  </form>
-</section>
+  <div class="m-8">
+    <section>
+      <form action="{% url 'home' %}" method="post" class="login">
+        <h1>Login</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="" name="next" value="{{ next }}">
+        <button type="submit" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Login</button>
+      </form>
+    </section>
+  </div>
+</div>
 
 {% endblock %} 

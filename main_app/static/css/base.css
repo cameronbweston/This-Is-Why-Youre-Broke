@@ -20,10 +20,8 @@ html {
 
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   font-size: 2rem;

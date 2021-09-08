@@ -15,8 +15,10 @@
   <h2>Total Amount Spent Yearly: ${{yearly_price}}</h2>
   <h2>Total Amount Spent Monthly: ${{monthly_price}}</h2>
 
-    <div class="jumbotron">
-    <hr>
+    {% comment %} Calculator Container {% endcomment %}
+    <div class="flex m-5 bg-gray-50 text-base rounded-md">
+
+    {% comment %}Simple Calculator  {% endcomment %}
     <div class="container" id="simple-interest">
       <h3>Simple Interest</h3>
       <form id="siForm">
@@ -42,9 +44,7 @@
         <input class="btn btn-secondary btn-lg" type="button" value="Reset" onClick="document.getElementById('siForm').reset()">
       </div>
     </div>
-    <br>
-    <hr>
-    <br>
+    {% comment %} Compound Calculator {% endcomment %}
     <div class="container" div="compound-interest ">
       <h3>Compound Interest</h3>
       <form id="ciForm">
@@ -77,8 +77,11 @@
   </div>
 
   <div>
-    <h1 id="totalInvestmentHeader">Total investment over the course of ___ Years: $___</h1>
-    <canvas id="myChart" width="380" height="200"></canvas>
+    <h1 id="totalInvestmentHeader" class="flex bg-gray-50 m-5 text-base justify-center">Total investment over the course of ___ Years: $___</h1>
+    {% comment %} Canvas Div {% endcomment %}
+    <div class="bg-white rounded-md m-20">
+      <canvas id="myChart" width="380" height="200"></canvas>
+    </div>
     <script>
       //Placeholder chart for populating page
       var ctx = document.getElementById('myChart').getContext('2d');
