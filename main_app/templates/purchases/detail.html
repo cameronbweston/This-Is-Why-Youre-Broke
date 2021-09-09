@@ -2,14 +2,13 @@
 {% load static %}
 
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/subs-index.css' %}"/>
   <link rel="stylesheet" type="text/css" href="{% static 'css/purchase-detail.css' %}"/>
-  <script defer src="{% static 'js/cat-detail.js' %}"></script>
+  <script defer src="{% static 'js/purchase.detail.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center h-screen ">
 <section class="bg-white px-6 py-4 my-3 mx-auto shadow rounded-md flex items-center">
     <div class="purchase-img">
     {% if purchase.photo.url %}
