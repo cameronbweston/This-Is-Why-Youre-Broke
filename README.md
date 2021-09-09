@@ -6,6 +6,7 @@ Have you ever sat down and calculated just exactly how much money you're spendin
 
 ## Getting Started:
 Heroku Deployment: [This Is Why You're Broke](https://this-is-why-youre-broke.herokuapp.com/)
+Trello Board: [Trello](https://trello.com/b/MyT5IWpH/this-is-why-youre-broke)
 
 ## Screenshots:
 ![Subscriptions View](https://github.com/cameronbweston/This-Is-Why-Youre-Broke/blob/main/this_is_why_youre_broke/blobs/subs-view.png)
@@ -22,10 +23,6 @@ Heroku Deployment: [This Is Why You're Broke](https://this-is-why-youre-broke.he
 - JavaScript
 - Postgresql
 
-## Planning Materials
-
-Trello Board: [Trello](https://trello.com/b/MyT5IWpH/this-is-why-youre-broke)
-
 ## Next Steps:
 1. Clean up the CSS and make everything clean and pretty
 2. Add animations to Chart JS and 
@@ -34,7 +31,8 @@ Trello Board: [Trello](https://trello.com/b/MyT5IWpH/this-is-why-youre-broke)
 - Chart JS not rendering sometimes or renders points incorrectly
 
 ## Lessons Learned:
-- Plan, plan, plan
+- MOST IMPORTANT TAKE AWAY: The Pareto Principle. 20% of your work will get you 80% of the results... Coming into this I didn't know Django as well as I thought I did. And on top of that I decided to incorporate Chart JS and Tailwind into it at the last minute without reading or understanding the documentation. With more prep and sharpening of the ax, this could have become what I envisioned.
+- Plan, plan, plan. I wasted so much time on tweaks that I often lost sight of the bigger picture. 
 - I often have a vision for a project but do not line out how to get from point A to B clearly enough
 - Not really a fan of Django
 - LEARN THE CSS BASICS BEFORE ATTEMPTING A FRAMEWORK LIKE TAILWIND
