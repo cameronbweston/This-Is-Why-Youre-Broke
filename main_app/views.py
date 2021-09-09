@@ -61,7 +61,7 @@ class SubCreate(LoginRequiredMixin, CreateView):
 
 class SubUpdate(LoginRequiredMixin, UpdateView):
   model = Subscription
-  fields = '__all__'
+  fields = ['name', 'price']
 
 class SubDelete(LoginRequiredMixin, DeleteView):
   model = Subscription

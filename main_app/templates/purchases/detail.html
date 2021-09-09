@@ -21,19 +21,19 @@
     {% endif %}
     </div>
     <div class="purchase-details">
-      <h1>{{ purchase.name }}</h1>
+      <h1 class="my-5">{{ purchase.name }}</h1>
         <div class="purchase-actions">
-          <a href="{% url 'purchase_update' purchase.id %}" class="border border-indigo-500 text-indigo-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-600 focus:outline-none focus:shadow-outline">Edit</a>
-          <a href="{% url 'purchase_delete' purchase.id %}" class="border border-red-500 text-red-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-red-600 focus:outline-none focus:shadow-outline">Delete</a>
+          <a href="{% url 'purchase_update' purchase.id %}" class="my-5 border border-indigo-500 text-indigo-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-600 focus:outline-none focus:shadow-outline">Edit</a>
+          <a href="{% url 'purchase_delete' purchase.id %}" class="my-5 border border-red-500 text-red-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-red-600 focus:outline-none focus:shadow-outline">Delete</a>
         </div>
       <p id="file-name"></p>
       <form action="{% url 'add_photo' purchase.id %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
-        <label class="border border-yellow-500 text-yellow-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-600 focus:outline-none focus:shadow-outline">
+        <label class="my-5 border border-yellow-500 text-yellow-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-600 focus:outline-none focus:shadow-outline">
           Choose photo
           <input type="file" name="photo-file" id="file-input">
         </label>
-        <button type="submit" class="border border-yellow-500 text-yellow-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-600 focus:outline-none focus:shadow-outline">Upload Photo</button>
+        <button type="submit" class="my-5 border border-yellow-500 text-yellow-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-600 focus:outline-none focus:shadow-outline">Upload Photo</button>
       </form>
     </div>
 </section>
