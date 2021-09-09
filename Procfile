@@ -1,1 +1,1 @@
-web: gunicorn <your-project-name-here>.wsgi
+web: gunicorn this_is_why_youre_broke.wsgi
