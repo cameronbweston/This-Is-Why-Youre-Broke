@@ -2,24 +2,29 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 {% endblock %}
 
 {% block content %}
 
-<div class="page-header">
-  <h1>Sign Up</h1>
-  <img src="{% static 'images/nerd-cat.svg' %}" alt="A cat using a computer"/>
+<div class="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
+  <div class="flex flex-col items-center m-5">
+    <div class="m-8">
+      <form action="{% url 'home' %}" method="post"  class="w-full bg-white rounded-lg">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="md:flex md:items-center m-4">
+          <div class="md:w-1/3"></div>
+          <div class="md:w-2/3">
+            <button class="m-2 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-4 rounded" type="submit">
+              Sign Up
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-{% if error_message %}
-  <p class="red-text">{{ error_message }}</p>
-{% endif %}
-<form action="" method="post" class="form-container" autocomplete="off">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <button type="submit" class="btn submit">Submit!</button>
-</form>
 
 {% endblock %}
