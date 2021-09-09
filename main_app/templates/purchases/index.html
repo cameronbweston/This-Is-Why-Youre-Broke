@@ -7,28 +7,27 @@
 
 {% block content %}
 
-<section class="page-header">
-  <h1>Stupid Purchases List</h1>
-</section>
+<section class="flex m-5 mx40  bg-white h-20 rounded-xl items-center justify-center">
   <h2>Total Value of Stuff: ${{total_price}}</h2>
+</section>
 
 <section class="card-container">
   {% for purchase in purchases %}
-    <div class="card">
       <a href="{% url 'purchase_detail' purchase.id %}">
-        <div class="card-content">
-          <div class="card-img-container">
-            {% if purchase.photo.url %}
-              <img src="{{purchase.photo.url}}" alt="A photo of {{purchase.name}}" class="subLogo">
-            {% else %}
-              <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="placeholderImage">
-            {% endif %}
+        <div class="max-w-sm bg-white m-5 px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
+          <div class="relative">
+            <img class="w-full rounded-xl" src="{{purchase.photo.url}}" alt="Colors" />
           </div>
-          <h2 class="card-title">{{ purchase.name }}</h2>
-          <h3>${{purchase.price}}</h3>
+          <h1 class="mt-4 text-gray-800 text-3xl font-bold cursor-pointer">{{purchase.name}}</h1>
+          <div class="my-4">
+            <div class="flex space-x-1 items-center">
+              <p>${{purchase.price}}</p>
+            </div>
+            <button class="mt-4 text-xl w-full text-white bg-indigo-600 py-1.5 rounded-xl shadow-lg">Item Details</button>
+          </div>
+        </div>
       </a>
       </div>
-    </div>
   {% endfor %}
 </section>
 
