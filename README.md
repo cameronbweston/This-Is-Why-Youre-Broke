@@ -8,10 +8,10 @@ Have you ever sat down and calculated just exactly how much money you're spendin
 Heroku Deployment: [This Is Why You're Broke](https://this-is-why-youre-broke.herokuapp.com/)
 
 ## Screenshots:
-![Subscriptions View] ()
-![Purchases View] ()
-![Caclulator View] ()
-![Chart View] ()
+![Subscriptions View](https://github.com/cameronbweston/This-Is-Why-Youre-Broke/blob/main/this_is_why_youre_broke/blobs/subs-view.png)
+![Purchases View](https://github.com/cameronbweston/This-Is-Why-Youre-Broke/blob/main/this_is_why_youre_broke/blobs/purchases-view.png)
+![Caclulator View](https://github.com/cameronbweston/This-Is-Why-Youre-Broke/blob/main/this_is_why_youre_broke/blobs/calculator-view.png)
+![Chart View](https://github.com/cameronbweston/This-Is-Why-Youre-Broke/blob/main/this_is_why_youre_broke/blobs/chart-view.png)
 
 ## Technologies Used:
 - Django
