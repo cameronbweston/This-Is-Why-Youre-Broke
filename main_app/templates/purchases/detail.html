@@ -13,11 +13,6 @@
     <div class="purchase-img">
     {% if purchase.photo.url %}
       <img src="{{purchase.photo.url}}" alt="A photo of {{purchase.name}}" class="usr-img">
-    {% else %}
-      <img 
-        src="{% static 'images/sk8r-boi-cat.svg' %}" 
-        alt="placeholderImage"
-      >
     {% endif %}
     </div>
     <div class="purchase-details">
