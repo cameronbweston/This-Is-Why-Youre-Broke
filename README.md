@@ -17,6 +17,7 @@ Trello Board: [Trello](https://trello.com/b/MyT5IWpH/this-is-why-youre-broke)
 ## Technologies Used:
 - Django
 - Python
+- Amazon S3
 - HTML
 - CSS
 - TailwindCSS
